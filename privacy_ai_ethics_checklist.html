@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개인정보 및 인공지능 윤리 점검표 - 서울특별시사회복지사협회</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--primary:#2D5A27;
+--primary-light:#4A8C3F;
+--primary-dark:#1B3A18;
+--accent:#D4A843;
+--accent-light:#E8C96A;
+--bg:#F7F5F0;
+--card:#FFFFFF;
+--text:#2C2C2C;
+--text-light:#6B6B6B;
+--border:#E0DDD5;
+--section-bg:#F0EDE5;
+--danger:#C0392B;
+--danger-light:#E74C3C;
+--success:#27AE60;
+--warning:#F39C12;
+--radius:10px;
+--shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+body{font-family:'Pretendard',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.app-header{
+background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 50%,var(--primary-dark) 100%);
+color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;
+position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(45,90,39,0.3);
+}
+.app-header h1{font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:10px;letter-spacing:-0.02em}
+.header-icon{width:32px;height:32px;background:rgba(255,255,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.header-btns{display:flex;gap:8px}
+.header-btn{
+background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);
+color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:0.85rem;
+font-weight:500;display:flex;align-items:center;gap:6px;transition:all .2s;font-family:inherit;
+}
+.header-btn:hover{background:rgba(255,255,255,0.25)}
+.container{max-width:800px;margin:0 auto;padding:24px 16px 80px}
+.intro-box{
+background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:28px;
+border-left:4px solid var(--accent);box-shadow:var(--shadow);
+}
+.intro-box .org-name{font-size:0.8rem;color:var(--accent);font-weight:600;margin-bottom:6px;letter-spacing:0.05em}
+.intro-box h2{font-size:1.05rem;font-weight:700;margin-bottom:10px;color:var(--primary-dark)}
+.intro-box p{font-size:0.9rem;color:var(--text-light);line-height:1.7}
+.info-section{
+background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:28px;box-shadow:var(--shadow);
+}
+.info-section h3{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--primary-dark);display:flex;align-items:center;gap:8px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:600px){.info-grid{grid-template-columns:1fr}}
+.info-field label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-light);margin-bottom:6px}
+.info-field input,.info-field select{
+width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;
+font-size:0.9rem;font-family:inherit;background:var(--bg);transition:border-color .2s;
+}
+.info-field input:focus,.info-field select:focus{outline:none;border-color:var(--primary)}
+.section-title{
+font-size:1.1rem;font-weight:800;color:var(--primary);margin:32px 0 16px;
+padding-bottom:8px;border-bottom:2px solid var(--primary);display:flex;align-items:center;gap:8px;
+}
+.question-card{
+background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:12px;
+box-shadow:var(--shadow);border:1px solid transparent;transition:border-color .2s;
+}
+.question-card:hover{border-color:var(--border)}
+.q-number{font-weight:700;color:var(--primary)}
+.q-text{font-size:0.92rem;font-weight:600;margin-bottom:12px;line-height:1.5}
+.q-sub{font-size:0.88rem;font-weight:600;color:var(--primary-light);margin:12px 0 8px}
+.radio-group,.checkbox-group{display:flex;flex-wrap:wrap;gap:8px 16px}
+.radio-label,.checkbox-label{
+display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;
+padding:4px 0;transition:color .2s;
+}
+.radio-label:hover,.checkbox-label:hover{color:var(--primary)}
+.radio-label input,.checkbox-label input{accent-color:var(--primary);width:16px;height:16px;cursor:pointer}
+.text-input,.number-input,.textarea-input{
+width:100%;max-width:400px;padding:10px 12px;border:1.5px solid var(--border);
+border-radius:8px;font-size:0.9rem;font-family:inherit;background:var(--bg);transition:border-color .2s;
+}
+.textarea-input{max-width:100%;min-height:100px;resize:vertical}
+.text-input:focus,.number-input:focus,.textarea-input:focus{outline:none;border-color:var(--primary)}
+.results-section{
+background:var(--card);border-radius:var(--radius);padding:24px;margin-top:32px;box-shadow:var(--shadow);
+}
+.results-title{font-size:1.05rem;font-weight:800;color:var(--primary-dark);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:600px){.score-grid{grid-template-columns:repeat(2,1fr)}}
+.score-card{
+background:var(--section-bg);border-radius:8px;padding:16px;
+}
+.score-card .label{font-size:0.78rem;font-weight:600;color:var(--text-light);margin-bottom:8px}
+.score-card .value{font-size:1.6rem;font-weight:800;color:var(--primary)}
+.score-card .value span{font-size:0.9rem;font-weight:500;color:var(--text-light)}
+.score-bar{height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden}
+.score-bar-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .6s ease}
+.total-score{
+background:linear-gradient(135deg,var(--primary),var(--primary-light));
+border-radius:8px;padding:20px;display:flex;justify-content:space-between;align-items:center;color:#fff;
+}
+.total-score .label{font-size:1rem;font-weight:700}
+.total-score .value{font-size:2rem;font-weight:800}
+.total-score .value span{font-size:1rem;font-weight:500;opacity:0.8}
+.submit-area{text-align:center;margin-top:28px}
+.submit-btn{
+background:var(--primary);color:#fff;border:none;padding:14px 48px;
+border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;
+font-family:inherit;transition:all .2s;box-shadow:0 4px 16px rgba(45,90,39,0.3);
+}
+.submit-btn:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(45,90,39,0.4)}
+/* Admin Modal */
+.modal-overlay{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;
+z-index:200;backdrop-filter:blur(4px);
+}
+.modal-overlay.hidden{display:none}
+.auth-modal{
+background:var(--card);border-radius:16px;padding:0;width:90%;max-width:400px;
+overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2);
+}
+.auth-header{
+background:linear-gradient(135deg,var(--primary),var(--primary-light));
+padding:36px 24px;text-align:center;color:#fff;
+}
+.auth-header .shield{font-size:3rem;margin-bottom:12px;display:block}
+.auth-header h2{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.auth-header p{font-size:0.82rem;opacity:0.85}
+.auth-header .hint{font-size:0.75rem;opacity:0.7;margin-top:4px}
+.auth-body{padding:28px 24px}
+.auth-body label{font-size:0.85rem;font-weight:600;display:block;margin-bottom:8px}
+.auth-body input{
+width:100%;padding:12px;border:2px solid var(--border);border-radius:10px;
+font-size:1rem;font-family:inherit;transition:border-color .2s;
+}
+.auth-body input:focus{outline:none;border-color:var(--primary)}
+.auth-btn{
+width:100%;padding:14px;background:var(--primary);color:#fff;border:none;
+border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;
+margin-top:16px;font-family:inherit;transition:all .2s;
+}
+.auth-btn:hover{background:var(--primary-dark)}
+.auth-cancel{
+width:100%;padding:12px;background:transparent;color:var(--text-light);
+border:1.5px solid var(--border);border-radius:10px;font-size:0.9rem;
+cursor:pointer;margin-top:8px;font-family:inherit;transition:all .2s;
+}
+.auth-cancel:hover{background:var(--section-bg)}
+/* Admin Dashboard */
+.admin-page{display:none}
+.admin-page.active{display:block}
+.checklist-page{display:block}
+.checklist-page.hidden{display:none}
+.admin-header{
+background:linear-gradient(135deg,var(--primary),var(--primary-light));
+color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;
+position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(45,90,39,0.3);
+}
+.admin-header h1{font-size:1.2rem;font-weight:700;display:flex;align-items:center;gap:10px}
+.tab-bar{
+display:flex;background:var(--card);border-bottom:2px solid var(--border);
+position:sticky;top:64px;z-index:99;
+}
+.tab-btn{
+flex:1;padding:14px;text-align:center;font-size:0.85rem;font-weight:600;
+cursor:pointer;border:none;background:transparent;font-family:inherit;
+color:var(--text-light);border-bottom:3px solid transparent;transition:all .2s;
+display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-btn:hover{background:var(--section-bg)}
+.tab-content{padding:24px 16px;max-width:900px;margin:0 auto}
+.admin-card{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.admin-card h3{font-size:0.95rem;font-weight:700;margin-bottom:12px;color:var(--primary-dark)}
+.add-row{display:flex;gap:8px;margin-bottom:16px}
+.add-row input,.add-row select{
+flex:1;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;
+font-size:0.9rem;font-family:inherit;background:var(--bg);
+}
+.add-row input:focus,.add-row select:focus{outline:none;border-color:var(--primary)}
+.add-btn{
+background:var(--primary);color:#fff;border:none;padding:10px 20px;
+border-radius:8px;font-size:0.88rem;font-weight:600;cursor:pointer;
+font-family:inherit;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:all .2s;
+}
+.add-btn:hover{background:var(--primary-dark)}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+display:inline-flex;align-items:center;gap:6px;
+background:var(--section-bg);border:1px solid var(--border);
+padding:6px 12px;border-radius:20px;font-size:0.82rem;font-weight:500;
+}
+.tag .del{
+background:var(--danger);color:#fff;border:none;width:18px;height:18px;
+border-radius:50%;cursor:pointer;font-size:0.7rem;display:flex;align-items:center;justify-content:center;
+}
+.tag .del:hover{background:var(--danger-light)}
+.record-table{width:100%;border-collapse:collapse;font-size:0.85rem}
+.record-table th{
+text-align:left;padding:10px 12px;background:var(--section-bg);
+font-weight:600;color:var(--text-light);border-bottom:2px solid var(--border);
+}
+.record-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.record-table tr:hover td{background:var(--section-bg)}
+.filter-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.filter-row select{
+padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;
+font-size:0.85rem;font-family:inherit;background:var(--bg);
+}
+.empty-msg{text-align:center;padding:40px;color:var(--text-light);font-size:0.9rem}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:600px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--section-bg);border-radius:8px;padding:16px;text-align:center}
+.stat-card .stat-label{font-size:0.78rem;color:var(--text-light);font-weight:600;margin-bottom:4px}
+.stat-card .stat-value{font-size:1.8rem;font-weight:800;color:var(--primary)}
+.person-list{margin-top:12px}
+.person-item{
+display:flex;justify-content:space-between;align-items:center;
+padding:10px 12px;border-bottom:1px solid var(--border);
+}
+.person-item:last-child{border-bottom:none}
+.person-info{font-size:0.88rem}
+.person-info .dept{font-size:0.78rem;color:var(--text-light);margin-left:8px}
+.person-del{
+background:var(--danger);color:#fff;border:none;padding:4px 10px;
+border-radius:6px;font-size:0.75rem;cursor:pointer;transition:all .2s;
+}
+.person-del:hover{background:var(--danger-light)}
+.download-btn{
+background:var(--accent);color:#fff;border:none;padding:8px 16px;
+border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;
+font-family:inherit;display:flex;align-items:center;gap:4px;transition:all .2s;
+}
+.download-btn:hover{background:var(--accent-light);color:var(--primary-dark)}
+.score-badge{
+display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;
+}
+.score-high{background:#d4edda;color:#155724}
+.score-mid{background:#fff3cd;color:#856404}
+.score-low{background:#f8d7da;color:#721c24}
+.toast{
+position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+background:var(--primary-dark);color:#fff;padding:12px 24px;border-radius:10px;
+font-size:0.9rem;font-weight:500;z-index:300;box-shadow:0 8px 30px rgba(0,0,0,0.2);
+opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- Checklist Page -->
+<div id="checklistPage" class="checklist-page">
+  <header class="app-header">
+    <h1><span class="header-icon">🛡️</span> 개인정보 및 인공지능 윤리 점검표</h1>
+    <div class="header-btns">
+      <button class="header-btn" onclick="showAdminAuth()">⚙️ 관리자</button>
+      <button class="header-btn" onclick="downloadExcel()">📥 엑셀 다운로드</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="intro-box">
+      <div class="org-name">서울특별시사회복지사협회</div>
+      <h2>사회복지사를 위한 개인정보 및 AI 윤리 자가점검</h2>
+      <p>개인정보와 인공지능의 활용은 이제 사회복지 실무에서도 중요한 업무 영역이 되었습니다. 이 점검표는 사회복지사가 업무 수행 과정에서 개인정보 보호와 AI 활용의 안전성, 책임성, 윤리성을 스스로 점검할 수 있도록 마련한 기준입니다. 매월 점검일을 정해 자신의 업무를 확인하고, 보다 안전하고 신뢰할 수 있는 실천을 함께 만들어 주세요.</p>
+    </div>
+
+    <div class="info-section">
+      <h3>📋 점검자 정보</h3>
+      <div class="info-grid">
+        <div class="info-field">
+          <label>점검자 이름</label>
+          <input type="text" id="inspectorName" placeholder="이름 입력">
+        </div>
+        <div class="info-field">
+          <label>점검자 부서</label>
+          <select id="inspectorDept"><option value="">선택하세요</option></select>
+        </div>
+        <div class="info-field">
+          <label>점검일</label>
+          <input type="date" id="inspectDate">
+        </div>
+      </div>
+    </div>
+
+    <!-- Questions will be rendered here -->
+    <div id="questionsContainer"></div>
+
+    <!-- Results -->
+    <div class="results-section">
+      <div class="results-title">📊 영역별 점검 결과</div>
+      <div class="score-grid" id="scoreGrid"></div>
+      <div class="total-score" id="totalScore">
+        <span class="label">총점</span>
+        <span class="value"><span id="totalVal">0</span> <span>/ 290 점</span></span>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="submit-btn" onclick="submitChecklist()">✅ 점검 결과 제출하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Auth Modal -->
+<div id="authModal" class="modal-overlay hidden">
+  <div class="auth-modal">
+    <div class="auth-header">
+      <span class="shield">🛡️</span>
+      <h2>관리자 인증</h2>
+      <p>대시보드 접속을 위해 비밀번호를 입력하세요.</p>
+      <div class="hint">현재는 임시 구축 단계로 비밀번호 1234 입력하세요.</div>
+    </div>
+    <div class="auth-body">
+      <label>비밀번호</label>
+      <input type="password" id="adminPw" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')authAdmin()">
+      <button class="auth-btn" onclick="authAdmin()">인증하기</button>
+      <button class="auth-cancel" onclick="hideAdminAuth()">돌아가기</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Page -->
+<div id="adminPage" class="admin-page">
+  <header class="admin-header">
+    <h1>⚙️ 관리자 대시보드</h1>
+    <button class="header-btn" onclick="exitAdmin()">← 돌아가기</button>
+  </header>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="stats" onclick="switchTab('stats')">📊 통계 대시보드</button>
+    <button class="tab-btn" data-tab="records" onclick="switchTab('records')">🕐 점검 기록</button>
+    <button class="tab-btn" data-tab="people" onclick="switchTab('people')">👥 점검자 관리</button>
+    <button class="tab-btn" data-tab="depts" onclick="switchTab('depts')">🏢 부서 관리</button>
+  </div>
+
+  <!-- Stats Tab -->
+  <div class="tab-content" id="tab-stats">
+    <div id="statsContent"></div>
+  </div>
+
+  <!-- Records Tab -->
+  <div class="tab-content" id="tab-records" style="display:none">
+    <div class="admin-card">
+      <div class="filter-row">
+        <h3>최근 점검 제출 현황 (<span id="recordCount">0</span>)</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:0.85rem;color:var(--text-light)">점검자 필터:</span>
+          <select id="recordFilter" onchange="renderRecords()"><option value="">전체 보기</option></select>
+        </div>
+      </div>
+      <div id="recordsBody"></div>
+    </div>
+  </div>
+
+  <!-- People Tab -->
+  <div class="tab-content" id="tab-people" style="display:none">
+    <div class="admin-card">
+      <h3>새 점검자 추가</h3>
+      <div class="add-row">
+        <input type="text" id="newPersonName" placeholder="이름">
+        <select id="newPersonDept"><option value="">부서 선택</option></select>
+        <button class="add-btn" onclick="addPerson()">＋ 추가</button>
+      </div>
+      <h3>등록된 점검자 목록 (<span id="personCount">0</span>)</h3>
+      <div id="personList" class="person-list"></div>
+    </div>
+  </div>
+
+  <!-- Depts Tab -->
+  <div class="tab-content" id="tab-depts" style="display:none">
+    <div class="admin-card">
+      <h3>새 부서 추가</h3>
+      <div class="add-row">
+        <input type="text" id="newDeptName" placeholder="부서명" onkeydown="if(event.key==='Enter')addDept()">
+        <button class="add-btn" onclick="addDept()">＋ 추가</button>
+      </div>
+      <h3>등록된 부서 목록</h3>
+      <div id="deptList" class="tag-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const SECTIONS = [
+  { id:'pc', title:'I. PC 및 정보시스템 보안 점검', max:90 },
+  { id:'collect', title:'II. 개인정보 수집 및 보관 점검', max:60 },
+  { id:'dispose', title:'III. 정보 파기', max:30 },
+  { id:'edu', title:'IV. 교육 및 인식 점검', max:40 },
+  { id:'ai', title:'V. 인공지능(AI) 윤리기준 점검', max:70 },
+];
+
+const QUESTIONS = [
+  // Section I - PC 보안 (max 90)
+  {id:1, section:'pc', text:'(업무용) 개인 컴퓨터의 암호가 설정되어 있다.', type:'yn', points:10},
+  {id:'1-1', section:'pc', text:'(업무용) 개인 컴퓨터 암호 수준은? (복수 응답)', type:'check', parent:1,
+    options:['숫자 또는 영문(또는 한글) 중 한 가지 체계로만 되어 있다.','숫자와 영문 등 두 가지 혼합으로 되어 있다. + 특수문자','암호가 8자리 이상이다.'], points:0},
+  {id:2, section:'pc', text:'개인정보처리시스템(전우/시설정보/그룹웨어/오피스365/구글)의 암호가 설정되어 있다.', type:'yn', points:10},
+  {id:'2-1', section:'pc', text:'개인정보처리시스템 암호 수준은? (복수 응답)', type:'check', parent:2,
+    options:['숫자 또는 영문(또는 한글) 중 한 가지 체계로만 되어 있다.','숫자와 영문 등 두 가지 혼합으로 되어 있다. + 특수문자','암호가 8자리 이상이다.'], points:0},
+  {id:3, section:'pc', text:'(업무용) 개인 컴퓨터에는 바이러스 및 스파이웨어를 검사, 치료할 수 있는 백신 프로그램이 설치되어 있다.', type:'yn', points:10},
+  {id:'3-1', section:'pc', text:'(업무용) 개인 컴퓨터를 백신 프로그램으로 정기적으로 검사 및 치료하고 있다.', type:'radio',
+    options:['매일 1회 이상','매주 1회 이상','매월 1회 이상','안한다'], points:[10,10,10,0]},
+  {id:4, section:'pc', text:'복지관 공식 프로그램 외에 메신저 또는 P2P 프로그램이 설치되어 있다.', type:'yn', points:10, invert:true},
+  {id:5, section:'pc', text:'업무로 카카오톡을 사용하고 있다면, 업무 보안서약서를 작성하였는가?', type:'radio',
+    options:['사용중 - 작성 함','사용중 - 작성하지 않음','해당없음(미사용중)'], points:[10,0,10]},
+  {id:6, section:'pc', text:'USB 사용 시 바이러스 검사를 매번 실시하고 있다.', type:'radio',
+    options:['그렇다','아니다','해당없음(미사용중)'], points:[10,0,10]},
+
+  // Section II - 수집/보관 (max 60)
+  {id:7, section:'collect', text:'정보수집대상으로부터 개인정보활용동의서를 철저하게 받고 있다.', type:'yn', points:10},
+  {id:8, section:'collect', text:'개인정보활용동의서를 보관하고 있다.', type:'yn', points:10},
+  {id:9, section:'collect', text:'개인이 수집하고 있는 개인정보는? (복수 응답)', type:'check',
+    options:['이름','주민번호','생년월일','주소','전화번호','핸드폰번호','이메일','종교','건강정보','가족관계','혈액형','학력','기타'], points:0},
+  {id:10, section:'collect', text:'개인정보가 담겨진 전자문서는 암호화 되어 있다.', type:'yn', points:10},
+  {id:'10-1', section:'collect', text:'전자문서 암호 수준은? (복수 응답)', type:'check', parent:10,
+    options:['모든 문서가 암호화 되어 있다.','암호는 영어, 숫자 등 혼합 체계로 되어 있다.','암호는 한 가지 체계로만 설정되어 있다.','암호는 8자리 이상이다.'], points:0},
+  {id:11, section:'collect', text:'개인정보가 담겨진 문서는 잠금장치가 있는 곳에 보관중이다.', type:'radio',
+    options:['100% 완벽하다','99%~80% 정도이다','79%~50% 정도이다','49% 이하이다','0% 이다'], points:[10,8,5,2,0]},
+  {id:12, section:'collect', text:'퇴직, 종결 등의 사유로 개인정보를 폐기한 적이 있다.', type:'yn', points:10},
+  {id:'12-1', section:'collect', text:'개인정보를 폐기한 서류는? (복수 응답)', type:'check', parent:12,
+    options:['폐기한 서류 없음','문서','컴퓨터 하드디스크 파일','사진','원드라이브 파일','기타'], points:0},
+  {id:'12-2', section:'collect', text:'나는 개인정보가 담겨진 문서 또는 컴퓨터 하드디스크 등을 완벽하게 파쇄 또는 폐기 처리하고 있다.', type:'radio',
+    options:['그렇다','아니다','모르겠다'], points:[10,0,0]},
+
+  // Section III - 정보 파기 (max 30)
+  // Note: questions 12, 12-1, 12-2 are already under collect. We'll handle scoring in section mapping.
+  // Actually from image, section III seems separate. Let me re-map based on screenshots more carefully.
+  // Looking at image 3, section IV starts at Q13. Let me keep collect ending at Q12-2 and put III as part of that.
+  // From image 4 scoring: I=90, II=60, III=30, IV=40, V=70 = 290
+  // Let me restructure: III has its own questions about disposal
+
+  // Section IV - 교육 및 인식 (max 40)
+  {id:13, section:'edu', text:'복지관에 개인정보 관리계획이 수립되어 있는 것을 알고 있는가?', type:'radio',
+    options:['예','아니오'], points:[10,0]},
+  {id:14, section:'edu', text:'이번 년도에 개인정보 교육을 몇 회 받았는지?', type:'number', placeholder:'숫자만 입력 (예: 1)', points:10},
+  {id:15, section:'edu', text:'개인정보보호법 교육 주회는?', type:'text', placeholder:'단답형 입력', points:0},
+  {id:16, section:'edu', text:'나의 개인정보보호에 대한 의식 수준은 10점 만점에 몇 점인가?', type:'number', placeholder:'1~10 숫자만 응답', points:10},
+  {id:17, section:'edu', text:'개인정보 의식 수준 작성 이유는?', type:'textarea', placeholder:'서술형 응답', points:0},
+
+  // Section V - AI 윤리 (max 70)
+  {id:18, section:'ai', text:'AI 서비스 사용 시 개인정보를 입력하지 않았습니까?', type:'yn', points:10},
+  {id:19, section:'ai', text:'AI가 생성한 결과물을 검토 없이 그대로 사용하지 않았습니까?', type:'yn', points:10},
+  {id:20, section:'ai', text:'AI 활용 결과에 대한 최종 책임이 사람에게 있음을 인지하고 있습니까?', type:'yn', points:10},
+  {id:21, section:'ai', text:'민감한 업무에 AI 활용 시 상급자와 협의하였습니까?', type:'yn', points:10},
+  {id:22, section:'ai', text:'AI 기반 의사결정이 특정 집단에 차별적이지 않은지 확인하였습니까?', type:'yn', points:10},
+  {id:23, section:'ai', text:'AI 활용 사실을 필요시 이해관계자에게 투명하게 공개할 수 있습니까?', type:'yn', points:10},
+  {id:24, section:'ai', text:'AI 서비스의 한계와 오류 가능성을 인지하고 있습니까?', type:'yn', points:10},
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  departments: ['관장','부장','함께운영팀','함께나눔팀','함께이용팀','함께이룸팀','함께동행팀','협력인력'],
+  people: [],
+  records: [],
+  answers: {},
+};
+
+// ============================================================
+// STORAGE
+// ============================================================
+const STORAGE_KEY = 'swsa-checklist-data';
+
+async function loadState() {
+  try {
+    const result = await window.storage.get(STORAGE_KEY);
+    if (result && result.value) {
+      const saved = JSON.parse(result.value);
+      state = { ...state, ...saved };
+    }
+  } catch(e) {
+    // first load or no data
+    console.log('No saved state, using defaults');
+  }
+}
+
+async function saveState() {
+  try {
+    await window.storage.set(STORAGE_KEY, JSON.stringify({
+      departments: state.departments,
+      people: state.people,
+      records: state.records,
+    }));
+  } catch(e) {
+    console.error('Save failed:', e);
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  await loadState();
+  setDefaultDate();
+  renderDeptSelect();
+  renderQuestions();
+  renderScores();
+}
+
+function setDefaultDate() {
+  const d = new Date();
+  document.getElementById('inspectDate').value = d.toISOString().split('T')[0];
+}
+
+// ============================================================
+// RENDER QUESTIONS
+// ============================================================
+function renderQuestions() {
+  const container = document.getElementById('questionsContainer');
+  let html = '';
+  let currentSection = '';
+
+  QUESTIONS.forEach(q => {
+    if (q.section !== currentSection) {
+      currentSection = q.section;
+      const sec = SECTIONS.find(s => s.id === currentSection);
+      html += `<div class="section-title">${sec.title}</div>`;
+    }
+
+    html += `<div class="question-card">`;
+
+    if (q.parent) {
+      html += `<div class="q-sub">${q.id}. ${q.text}</div>`;
+    } else {
+      html += `<div class="q-text"><span class="q-number">${q.id}.</span> ${q.text}</div>`;
+    }
+
+    if (q.type === 'yn') {
+      html += `<div class="radio-group">
+        <label class="radio-label"><input type="radio" name="q${q.id}" value="yes" onchange="setAnswer('${q.id}','yes')"> 그렇다</label>
+        <label class="radio-label"><input type="radio" name="q${q.id}" value="no" onchange="setAnswer('${q.id}','no')"> 아니다</label>
+      </div>`;
+    } else if (q.type === 'radio') {
+      html += `<div class="radio-group">`;
+      q.options.forEach((opt, i) => {
+        html += `<label class="radio-label"><input type="radio" name="q${q.id}" value="${i}" onchange="setAnswer('${q.id}',${i})"> ${opt}</label>`;
+      });
+      html += `</div>`;
+    } else if (q.type === 'check') {
+      html += `<div class="checkbox-group">`;
+      q.options.forEach((opt, i) => {
+        html += `<label class="checkbox-label"><input type="checkbox" name="q${q.id}" value="${i}" onchange="setCheckAnswer('${q.id}',${i},this.checked)"> ${opt}</label>`;
+      });
+      html += `</div>`;
+    } else if (q.type === 'number') {
+      html += `<input type="number" class="number-input" placeholder="${q.placeholder||''}" onchange="setAnswer('${q.id}',this.value)" onkeyup="setAnswer('${q.id}',this.value)">`;
+    } else if (q.type === 'text') {
+      html += `<input type="text" class="text-input" placeholder="${q.placeholder||''}" onchange="setAnswer('${q.id}',this.value)">`;
+    } else if (q.type === 'textarea') {
+      html += `<textarea class="textarea-input" placeholder="${q.placeholder||''}" onchange="setAnswer('${q.id}',this.value)"></textarea>`;
+    }
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderScores() {
+  const grid = document.getElementById('scoreGrid');
+  let html = '';
+  SECTIONS.forEach(sec => {
+    const score = calcSectionScore(sec.id);
+    const pct = sec.max > 0 ? (score / sec.max * 100) : 0;
+    html += `<div class="score-card">
+      <div class="label">${sec.title.split('. ')[0]}. ${sec.title.split('. ').slice(1).join('. ').substring(0,8)}</div>
+      <div class="value" style="color:var(--danger)">${score} <span>/ ${sec.max}</span></div>
+      <div class="score-bar"><div class="score-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+
+  const total = SECTIONS.reduce((sum, sec) => sum + calcSectionScore(sec.id), 0);
+  document.getElementById('totalVal').textContent = total;
+}
+
+// ============================================================
+// ANSWER HANDLING
+// ============================================================
+function setAnswer(qid, val) {
+  state.answers[qid] = val;
+  renderScores();
+}
+
+function setCheckAnswer(qid, idx, checked) {
+  if (!state.answers[qid]) state.answers[qid] = [];
+  if (checked) {
+    if (!state.answers[qid].includes(idx)) state.answers[qid].push(idx);
+  } else {
+    state.answers[qid] = state.answers[qid].filter(v => v !== idx);
+  }
+  renderScores();
+}
+
+function calcSectionScore(sectionId) {
+  let score = 0;
+  QUESTIONS.filter(q => q.section === sectionId).forEach(q => {
+    const ans = state.answers[q.id];
+    if (ans === undefined || ans === null || ans === '') return;
+
+    if (q.type === 'yn') {
+      if (q.invert) {
+        score += (ans === 'no') ? q.points : 0;
+      } else {
+        score += (ans === 'yes') ? q.points : 0;
+      }
+    } else if (q.type === 'radio' && Array.isArray(q.points)) {
+      score += q.points[parseInt(ans)] || 0;
+    } else if (q.type === 'number' && q.points > 0) {
+      const num = parseFloat(ans);
+      if (!isNaN(num) && num > 0) score += Math.min(q.points, q.points);
+    }
+  });
+  return score;
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+function submitChecklist() {
+  const name = document.getElementById('inspectorName').value.trim();
+  const dept = document.getElementById('inspectorDept').value;
+  const date = document.getElementById('inspectDate').value;
+
+  if (!name) { showToast('점검자 이름을 입력해주세요.'); return; }
+  if (!dept) { showToast('부서를 선택해주세요.'); return; }
+
+  const scores = {};
+  let total = 0;
+  SECTIONS.forEach(sec => {
+    scores[sec.id] = calcSectionScore(sec.id);
+    total += scores[sec.id];
+  });
+
+  const record = {
+    id: Date.now(),
+    name, dept, date,
+    scores, total,
+    answers: { ...state.answers },
+    submittedAt: new Date().toISOString(),
+  };
+
+  state.records.push(record);
+  state.answers = {};
+  saveState();
+
+  // Reset form
+  document.getElementById('inspectorName').value = '';
+  document.getElementById('inspectorDept').value = '';
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+  document.querySelectorAll('.number-input,.text-input,.textarea-input').forEach(el => el.value = '');
+  renderScores();
+  showToast('✅ 점검 결과가 제출되었습니다!');
+}
+
+// ============================================================
+// ADMIN
+// ============================================================
+function showAdminAuth() {
+  document.getElementById('authModal').classList.remove('hidden');
+  document.getElementById('adminPw').value = '';
+  document.getElementById('adminPw').focus();
+}
+
+function hideAdminAuth() {
+  document.getElementById('authModal').classList.add('hidden');
+}
+
+function authAdmin() {
+  if (document.getElementById('adminPw').value === '1234') {
+    hideAdminAuth();
+    document.getElementById('checklistPage').classList.add('hidden');
+    document.getElementById('adminPage').classList.add('active');
+    renderAdmin();
+  } else {
+    showToast('비밀번호가 올바르지 않습니다.');
+  }
+}
+
+function exitAdmin() {
+  document.getElementById('adminPage').classList.remove('active');
+  document.getElementById('checklistPage').classList.remove('hidden');
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+  ['stats','records','people','depts'].forEach(id => {
+    document.getElementById('tab-'+id).style.display = id === tabId ? '' : 'none';
+  });
+  renderAdmin();
+}
+
+function renderAdmin() {
+  renderStats();
+  renderRecords();
+  renderPeople();
+  renderDepts();
+}
+
+// ============================================================
+// STATS TAB
+// ============================================================
+function renderStats() {
+  const el = document.getElementById('statsContent');
+  if (state.records.length === 0) {
+    el.innerHTML = '<div class="empty-msg">통계를 표시할 점검 기록이 없습니다.</div>';
+    return;
+  }
+
+  const count = state.records.length;
+  const avgTotal = Math.round(state.records.reduce((s,r) => s + r.total, 0) / count);
+  const maxTotal = Math.max(...state.records.map(r => r.total));
+
+  let html = `<div class="stat-grid">
+    <div class="stat-card"><div class="stat-label">총 제출 수</div><div class="stat-value">${count}</div></div>
+    <div class="stat-card"><div class="stat-label">평균 점수</div><div class="stat-value">${avgTotal}</div></div>
+    <div class="stat-card"><div class="stat-label">최고 점수</div><div class="stat-value">${maxTotal}</div></div>
+  </div>`;
+
+  // Section averages
+  html += `<div class="admin-card"><h3>영역별 평균 점수</h3><div class="score-grid">`;
+  SECTIONS.forEach(sec => {
+    const avg = Math.round(state.records.reduce((s,r) => s + (r.scores[sec.id]||0), 0) / count);
+    const pct = sec.max > 0 ? (avg / sec.max * 100) : 0;
+    html += `<div class="score-card">
+      <div class="label">${sec.title.split('. ').slice(1).join('. ').substring(0,10)}</div>
+      <div class="value">${avg} <span>/ ${sec.max}</span></div>
+      <div class="score-bar"><div class="score-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  el.innerHTML = html;
+}
+
+// ============================================================
+// RECORDS TAB
+// ============================================================
+function renderRecords() {
+  const filter = document.getElementById('recordFilter').value;
+  let records = [...state.records].reverse();
+  if (filter) records = records.filter(r => r.name === filter);
+
+  // Update filter options
+  const filterEl = document.getElementById('recordFilter');
+  const names = [...new Set(state.records.map(r => r.name))];
+  const currentVal = filterEl.value;
+  filterEl.innerHTML = '<option value="">전체 보기</option>';
+  names.forEach(n => {
+    filterEl.innerHTML += `<option value="${n}" ${n===currentVal?'selected':''}>${n}</option>`;
+  });
+
+  document.getElementById('recordCount').textContent = records.length;
+
+  if (records.length === 0) {
+    document.getElementById('recordsBody').innerHTML = '<div class="empty-msg">제출된 점검 기록이 없습니다.</div>';
+    return;
+  }
+
+  let html = `<table class="record-table"><thead><tr>
+    <th>점검자</th><th>부서</th><th>점검일</th><th>총점</th><th>등급</th><th></th>
+  </tr></thead><tbody>`;
+
+  records.forEach(r => {
+    const pct = r.total / 290 * 100;
+    let badge = 'score-low', label = '미흡';
+    if (pct >= 80) { badge = 'score-high'; label = '우수'; }
+    else if (pct >= 50) { badge = 'score-mid'; label = '보통'; }
+
+    html += `<tr>
+      <td>${r.name}</td><td>${r.dept}</td><td>${r.date}</td>
+      <td><strong>${r.total}</strong>/290</td>
+      <td><span class="score-badge ${badge}">${label}</span></td>
+      <td><button class="person-del" onclick="deleteRecord(${r.id})">삭제</button></td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  document.getElementById('recordsBody').innerHTML = html;
+}
+
+function deleteRecord(id) {
+  if (!confirm('이 기록을 삭제하시겠습니까?')) return;
+  state.records = state.records.filter(r => r.id !== id);
+  saveState();
+  renderRecords();
+  renderStats();
+  showToast('기록이 삭제되었습니다.');
+}
+
+// ============================================================
+// PEOPLE TAB
+// ============================================================
+function renderPeople() {
+  const el = document.getElementById('personList');
+  document.getElementById('personCount').textContent = state.people.length;
+
+  // Update dept select
+  const sel = document.getElementById('newPersonDept');
+  sel.innerHTML = '<option value="">부서 선택</option>';
+  state.departments.forEach(d => sel.innerHTML += `<option value="${d}">${d}</option>`);
+
+  if (state.people.length === 0) {
+    el.innerHTML = '<div class="empty-msg">등록된 점검자가 없습니다.</div>';
+    return;
+  }
+
+  el.innerHTML = state.people.map((p, i) => `
+    <div class="person-item">
+      <div class="person-info">${p.name}<span class="dept">${p.dept}</span></div>
+      <button class="person-del" onclick="removePerson(${i})">삭제</button>
+    </div>
+  `).join('');
+}
+
+function addPerson() {
+  const name = document.getElementById('newPersonName').value.trim();
+  const dept = document.getElementById('newPersonDept').value;
+  if (!name) { showToast('이름을 입력해주세요.'); return; }
+  if (!dept) { showToast('부서를 선택해주세요.'); return; }
+  state.people.push({ name, dept });
+  saveState();
+  document.getElementById('newPersonName').value = '';
+  renderPeople();
+  showToast(`${name}님이 추가되었습니다.`);
+}
+
+function removePerson(idx) {
+  const p = state.people[idx];
+  if (!confirm(`${p.name}님을 삭제하시겠습니까?`)) return;
+  state.people.splice(idx, 1);
+  saveState();
+  renderPeople();
+}
+
+// ============================================================
+// DEPT TAB
+// ============================================================
+function renderDepts() {
+  const el = document.getElementById('deptList');
+  el.innerHTML = state.departments.map((d, i) => `
+    <span class="tag">${d} <button class="del" onclick="removeDept(${i})">✕</button></span>
+  `).join('');
+}
+
+function addDept() {
+  const name = document.getElementById('newDeptName').value.trim();
+  if (!name) { showToast('부서명을 입력해주세요.'); return; }
+  if (state.departments.includes(name)) { showToast('이미 존재하는 부서입니다.'); return; }
+  state.departments.push(name);
+  saveState();
+  document.getElementById('newDeptName').value = '';
+  renderDepts();
+  renderDeptSelect();
+  showToast(`'${name}' 부서가 추가되었습니다.`);
+}
+
+function removeDept(idx) {
+  const name = state.departments[idx];
+  if (!confirm(`'${name}' 부서를 삭제하시겠습니까?`)) return;
+  state.departments.splice(idx, 1);
+  saveState();
+  renderDepts();
+  renderDeptSelect();
+}
+
+function renderDeptSelect() {
+  const sel = document.getElementById('inspectorDept');
+  sel.innerHTML = '<option value="">선택하세요</option>';
+  state.departments.forEach(d => sel.innerHTML += `<option value="${d}">${d}</option>`);
+}
+
+// ============================================================
+// EXCEL DOWNLOAD
+// ============================================================
+function downloadExcel() {
+  if (state.records.length === 0) { showToast('다운로드할 기록이 없습니다.'); return; }
+
+  let csv = '\uFEFF점검자,부서,점검일,PC보안,정보수집/보관,정보파기,교육/인식,AI윤리,총점\n';
+  state.records.forEach(r => {
+    csv += `${r.name},${r.dept},${r.date},${r.scores.pc||0},${r.scores.collect||0},${r.scores.dispose||0},${r.scores.edu||0},${r.scores.ai||0},${r.total}\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `점검결과_${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('엑셀 파일이 다운로드됩니다.');
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// ============================================================
+// START
+// ============================================================
+init();
+</script>
+</body>
+</html>
